@@ -109,6 +109,7 @@ void FractalNode::draw(sf::RenderTarget& renderTarget)
 	//shape.setPointCount(minRes + (maxRes - minRes) * std::clamp(zoom, 0.f, 1.f)); Dynamic resolution
 
 	renderTarget.draw(shape);
+	++Manager::renderCount;
 
 	for (auto& child : childrenNodes)
 	{

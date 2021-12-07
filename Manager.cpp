@@ -53,6 +53,17 @@ namespace Manager
 			float scalar = 1 << fractal.colors.size();
 			cameraView.setSize(cameraView.getSize() * scalar);
 			sf::Vector2f cameraCenter = cameraView.getCenter();
+			
+			//If camera is located at the edge of the fractal...
+			/*
+			std::cout << std::fabs(cameraCenter.x) - cameraView.getSize().x / 2.f;
+			if (std::fabs(cameraCenter.x) - cameraView.getSize().x / 2.f > 1.f)
+			{
+				while(false)
+				{
+				}
+			}
+			*/
 			//0.0078125 is the largest negative power of 2 less than 0.001
 			cameraCenter.x = fmodf(cameraCenter.x, 0.0078125f);
 			cameraView.setCenter(cameraCenter * scalar);
@@ -103,8 +114,13 @@ namespace Manager
 		{
 			processWindowEvents();
 			updateCameraPosition();
+			//auto v = windowPtr->getView(); Culling debug view
+			//v.setSize(v.getSize() * 10.f);
+			//windowPtr->setView(v);
 			fractal.draw(*windowPtr);
 			windowPtr->display();
+			//std::cout << renderCount << '\n'; How many circles were rendered in the frame?
+			renderCount = 0;
 		}
 	}
 	void init()
